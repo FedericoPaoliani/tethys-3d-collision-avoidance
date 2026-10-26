@@ -15,14 +15,6 @@ Due nuove prove del **livello 1**, registrate il 26 ottobre 2026. Le anteprime a
 
 **Esiti dichiarati:** nessuna delle due prove soddisfa il criterio di successo completo; i log non registrano contatti fisici. Questi video illustrano comportamento e limiti del sistema e sono separati dalle campagne della tesi. **[Dettagli, log e strumenti](video_simulazioni_finali/README.md)**.
 
-## Guarda la dimostrazione
-
-[![Tethys durante la deviazione](progetto/ros2_tethys/presentazione_tesi/fotogrammi/Fase_2_deviazione_video8.0s_sim19.4s.png)](video_finali/Manovra_Collision_Avoidance_Tethys.mp4)
-
-**[Apri o scarica il video MP4](video_finali/Manovra_Collision_Avoidance_Tethys.mp4)** · circa 20 secondi · 1080p · riproduzione **2×** · senza audio.
-
-Il video mostra avvicinamento, deviazione, superamento e ripresa in uno scenario dimostrativo con **un solo pilastro**. È distinto dai sei mondi della campagna sperimentale. [Dettagli della demo](progetto/ros2_tethys/presentazione_tesi/LEGGIMI.md).
-
 ## Esplora il progetto
 
 | Materiale | Collegamento |
