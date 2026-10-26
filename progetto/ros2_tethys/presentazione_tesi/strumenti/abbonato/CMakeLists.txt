@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.10)
+project(abbonato_telecamere CXX)
+set(CMAKE_CXX_STANDARD 17)
+find_package(ignition-transport11 REQUIRED)
+find_package(ignition-msgs8 REQUIRED)
+add_executable(abbonato_telecamere abbonato_telecamere.cc)
+target_link_libraries(abbonato_telecamere ignition-transport11::core ignition-msgs8::core)

@@ -1,0 +1,211 @@
+{
+  "run": 719,
+  "label": "multi5_campagna",
+  "world": "mondoMulti5_L3",
+  "stop_reason": "all_resolved",
+  "n_drones": 5,
+  "goals": 1,
+  "min_goals_for_success": 5,
+  "success": false,
+  "physical_contact_events": 2,
+  "drone_drone_contact_events": 0,
+  "contact_messages_received": 16,
+  "min_drone_separation": {
+    "dist_3d_m": 2.0661818308668005,
+    "pair": [
+      "tethys_2",
+      "tethys_4"
+    ],
+    "sim_t": 32.349
+  },
+  "mission_sim_s": 226.763,
+  "mission_wall_s": 301.6006188392639,
+  "rt_factor": 0.751026310462304,
+  "orphan_pids_killed": [],
+  "input_gaps": {
+    "clock": {
+      "messages": 219395,
+      "gaps_over_0_6_s": 1,
+      "total_gap_wall_s": 1.5,
+      "gaps": [
+        {
+          "sim_t": 0.0,
+          "wall_gap_s": 1.5,
+          "wall_end": 1791202210.0
+        }
+      ]
+    },
+    "pose": {
+      "messages": 17356,
+      "gaps_over_0_6_s": 1,
+      "total_gap_wall_s": 1.5,
+      "gaps": [
+        {
+          "sim_t": 0.02,
+          "wall_gap_s": 1.5,
+          "wall_end": 1791202210.0
+        }
+      ]
+    },
+    "tethys_0/frontal_sonar": {
+      "messages": 1134,
+      "gaps_over_0_6_s": 0,
+      "total_gap_wall_s": 0,
+      "gaps": []
+    },
+    "tethys_1/frontal_sonar": {
+      "messages": 1134,
+      "gaps_over_0_6_s": 0,
+      "total_gap_wall_s": 0,
+      "gaps": []
+    },
+    "tethys_2/frontal_sonar": {
+      "messages": 1134,
+      "gaps_over_0_6_s": 0,
+      "total_gap_wall_s": 0,
+      "gaps": []
+    },
+    "tethys_3/frontal_sonar": {
+      "messages": 1134,
+      "gaps_over_0_6_s": 0,
+      "total_gap_wall_s": 0,
+      "gaps": []
+    },
+    "tethys_4/frontal_sonar": {
+      "messages": 1134,
+      "gaps_over_0_6_s": 0,
+      "total_gap_wall_s": 0,
+      "gaps": []
+    }
+  },
+  "parked_at_goal": [
+    "1791202438.424332675 remove tethys_1 -> set_pose"
+  ],
+  "drones": {
+    "tethys_0": {
+      "state": "stall",
+      "end_sim_t": 95.04,
+      "goal": false,
+      "goal_after_stall": false,
+      "controller_goal_dist_m": null,
+      "contact_pipeline_configured": true,
+      "physical_contact_events": 0,
+      "drone_drone_contact_events": 0,
+      "min_goal_dist_m": 72.24241892916028,
+      "final_goal_dist_m": 74.68125983413472,
+      "distance_m": 52.51812196294907,
+      "measured_sim_s": 226.51000000000002,
+      "mean_speed_m_s": 0.2318578515869015,
+      "below_0_4_m_s_sim_s": 197.806,
+      "z_min": 6.994157804790721,
+      "z_max": 7.486676711700634,
+      "abs_roll_max_deg": 0.8661651453800714,
+      "TURN-BOOST": 0,
+      "TURN-SLOWDOWN": 14,
+      "TURN-NOT-CLOSING": 0,
+      "CURVE-BRAKE": 310,
+      "SIDE-AVOID": 4,
+      "DEPTH LIMIT": 0
+    },
+    "tethys_1": {
+      "state": "goal",
+      "end_sim_t": 171.12,
+      "goal": true,
+      "goal_after_stall": false,
+      "controller_goal_dist_m": 2.94,
+      "contact_pipeline_configured": true,
+      "physical_contact_events": 0,
+      "drone_drone_contact_events": 0,
+      "min_goal_dist_m": 2.919135796807172,
+      "final_goal_dist_m": 2.919135796807172,
+      "distance_m": 128.2116993444915,
+      "measured_sim_s": 170.89000000000001,
+      "mean_speed_m_s": 0.7502586420767248,
+      "below_0_4_m_s_sim_s": 68.588,
+      "z_min": 7.107360300833528,
+      "z_max": 10.48477747710875,
+      "abs_roll_max_deg": 2.764074386604404,
+      "TURN-BOOST": 0,
+      "TURN-SLOWDOWN": 6,
+      "TURN-NOT-CLOSING": 0,
+      "CURVE-BRAKE": 106,
+      "SIDE-AVOID": 1,
+      "DEPTH LIMIT": 0
+    },
+    "tethys_2": {
+      "state": "stall",
+      "end_sim_t": 226.763,
+      "goal": false,
+      "goal_after_stall": false,
+      "controller_goal_dist_m": null,
+      "contact_pipeline_configured": true,
+      "physical_contact_events": 2,
+      "drone_drone_contact_events": 0,
+      "min_goal_dist_m": 23.719665786814346,
+      "final_goal_dist_m": 26.455965765888774,
+      "distance_m": 141.71795302060167,
+      "measured_sim_s": 226.51000000000002,
+      "mean_speed_m_s": 0.6256587039009388,
+      "below_0_4_m_s_sim_s": 113.29399999999998,
+      "z_min": 4.418050526972053,
+      "z_max": 7.475016056074173,
+      "abs_roll_max_deg": 11.717697517100984,
+      "TURN-BOOST": 3,
+      "TURN-SLOWDOWN": 22,
+      "TURN-NOT-CLOSING": 6,
+      "CURVE-BRAKE": 147,
+      "SIDE-AVOID": 1,
+      "DEPTH LIMIT": 43
+    },
+    "tethys_3": {
+      "state": "stall",
+      "end_sim_t": 188.65200000000002,
+      "goal": false,
+      "goal_after_stall": false,
+      "controller_goal_dist_m": null,
+      "contact_pipeline_configured": true,
+      "physical_contact_events": 0,
+      "drone_drone_contact_events": 0,
+      "min_goal_dist_m": 16.173579588712176,
+      "final_goal_dist_m": 22.39166044390857,
+      "distance_m": 120.12729670478339,
+      "measured_sim_s": 226.51000000000002,
+      "mean_speed_m_s": 0.5303399262936885,
+      "below_0_4_m_s_sim_s": 145.37400000000002,
+      "z_min": 8.726470289899552,
+      "z_max": 10.506332033088691,
+      "abs_roll_max_deg": 1.6033619790484999,
+      "TURN-BOOST": 0,
+      "TURN-SLOWDOWN": 28,
+      "TURN-NOT-CLOSING": 3,
+      "CURVE-BRAKE": 227,
+      "SIDE-AVOID": 2,
+      "DEPTH LIMIT": 0
+    },
+    "tethys_4": {
+      "state": "stall",
+      "end_sim_t": 121.952,
+      "goal": false,
+      "goal_after_stall": false,
+      "controller_goal_dist_m": null,
+      "contact_pipeline_configured": true,
+      "physical_contact_events": 0,
+      "drone_drone_contact_events": 0,
+      "min_goal_dist_m": 61.02570252159183,
+      "final_goal_dist_m": 70.70016903903323,
+      "distance_m": 68.31662112731134,
+      "measured_sim_s": 226.51000000000002,
+      "mean_speed_m_s": 0.3016053204154842,
+      "below_0_4_m_s_sim_s": 168.131,
+      "z_min": 4.018057499695491,
+      "z_max": 7.356111561475228,
+      "abs_roll_max_deg": 1.2808762424864473,
+      "TURN-BOOST": 2,
+      "TURN-SLOWDOWN": 35,
+      "TURN-NOT-CLOSING": 8,
+      "CURVE-BRAKE": 212,
+      "SIDE-AVOID": 0,
+      "DEPTH LIMIT": 60
+    }
+  }
+}

@@ -1,0 +1,713 @@
+<sdf version="1.9">
+  <world name="buoyant_tethys">
+    <scene>
+      <ambient>0.0 0.6 0.7</ambient>
+      <background>0.0 0.4 0.5</background>
+    </scene>
+
+    <physics name="1ms" type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <plugin filename="ignition-gazebo-physics-system" name="ignition::gazebo::systems::Physics" />
+    <plugin filename="ignition-gazebo-contact-system" name="ignition::gazebo::systems::Contact" />
+    <plugin filename="ignition-gazebo-user-commands-system" name="ignition::gazebo::systems::UserCommands" />
+    <plugin filename="ignition-gazebo-scene-broadcaster-system" name="ignition::gazebo::systems::SceneBroadcaster" />
+    <plugin filename="ignition-gazebo-sensors-system" name="ignition::gazebo::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="ignition-gazebo-buoyancy-system" name="ignition::gazebo::systems::Buoyancy">
+      <uniform_fluid_density>1025</uniform_fluid_density>
+    </plugin>
+
+    <light type="directional" name="sole_mondo">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 50 0 0 0</pose>
+      <diffuse>1 1 1 1</diffuse>
+      <specular>0.5 0.5 0.5 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <model name="tethys">
+      <pose>0.00 -50.00 8.00 0 0 -1.5707963</pose>
+
+    <enable_wind>true</enable_wind>
+
+    
+    <link name="base_link">
+      <inertial>
+  	<pose>0.15444914765701465 0 -0.04 0 0 0</pose>
+        
+        <mass>114.83640000000001</mass>
+        
+        <inertia>
+          <ixx>3.000000</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>41.980233</iyy>
+          <iyz>0</iyz>
+          <izz>41.980233</izz>
+
+        </inertia>
+      </inertial>
+
+      <collision name="main_body_buoyancy"><pose>0 0 0 0 0 0</pose>
+      <geometry><box><size>2.0 0.4 0.1799598780487805 </size></box></geometry></collision>
+
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://tethys/meshes/tethys.dae</uri>
+            <submesh>
+              <name>Body</name>
+              <center>false</center>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>1.0 1.0 1.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>/home/federico/ros2_tethys/src/lrauv_description/models/tethys/materials/textures/Tethys_Albedo.png</albedo_map>
+              <normal_map>/home/federico/ros2_tethys/src/lrauv_description/models/tethys/materials/textures/Tethys_Normal.png</normal_map>
+              <metalness_map>/home/federico/ros2_tethys/src/lrauv_description/models/tethys/materials/textures/Tethys_Metalness.png</metalness_map>
+              <roughness_map>/home/federico/ros2_tethys/src/lrauv_description/models/tethys/materials/textures/Tethys_Roughness.png</roughness_map>
+            </metal>
+          </pbr>
+          <script>
+            <uri>model://tethys/materials/scripts/</uri>
+            <uri>model://tethys/materials/textures/</uri>
+            <name>tethys/Tethys_Diffuse</name>
+          </script>
+        </material>
+      </visual>
+      
+      <sensor name="frontal_sonar" type="gpu_lidar">
+  <pose>-1.0 0 0 0 0 3.14159</pose>
+  <always_on>true</always_on>
+  <update_rate>5</update_rate>
+  <visualize>false</visualize>
+  <topic>/model/tethys/frontal_sonar</topic>
+  <lidar>
+            <visibility_mask>4294967293</visibility_mask>
+    <scan>
+      <horizontal>
+        <samples>30</samples>
+        <resolution>1</resolution>
+        <min_angle>-0.785</min_angle>
+        <max_angle>0.785</max_angle>
+      </horizontal>
+      <vertical>
+        <samples>15</samples>
+        <resolution>1</resolution>
+        <min_angle>-0.523</min_angle>
+        <max_angle>0.523</max_angle>
+      </vertical>
+    </scan>
+    <range>
+      <min>0.1</min>
+      <max>35.0</max>
+      <resolution>0.01</resolution>
+    </range>
+  </lidar>
+</sensor>
+
+  <sensor name="bottom_sonar" type="gpu_lidar">
+  <pose>0 0 -0.15 0 1.5708 0</pose>
+  <always_on>true</always_on>
+  <update_rate>2</update_rate>
+  <visualize>false</visualize>
+  <topic>/model/tethys/bottom_sonar</topic>
+
+  <lidar>
+            <visibility_mask>4294967293</visibility_mask>
+    <scan>
+      <horizontal>
+        <samples>1</samples>
+        <resolution>1</resolution>
+        <min_angle>0</min_angle>
+        <max_angle>0</max_angle>
+      </horizontal>
+
+      <vertical>
+        <samples>1</samples>
+        <resolution>1</resolution>
+        <min_angle>0</min_angle>
+        <max_angle>0</max_angle>
+      </vertical>
+    </scan>
+
+    <range>
+      <min>0.05</min>
+      <max>10.0</max>
+      <resolution>0.01</resolution>
+    </range>
+  </lidar>
+</sensor>
+
+      <sensor name="left_sonar" type="gpu_lidar">
+        <pose>0 -0.25 0 0 0 -1.5708</pose>
+        <always_on>true</always_on>
+        <update_rate>2</update_rate>
+        <visualize>false</visualize>
+        <topic>/model/tethys/left_sonar</topic>
+        <lidar>
+            <visibility_mask>4294967293</visibility_mask>
+          <scan>
+            <horizontal>
+              <samples>10</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.35</min_angle>
+              <max_angle>0.35</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>5</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.25</min_angle>
+              <max_angle>0.25</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.1</min>
+            <max>10.0</max>
+            <resolution>0.01</resolution>
+          </range>
+        </lidar>
+      </sensor>
+
+      <sensor name="right_sonar" type="gpu_lidar">
+        <pose>0 0.25 0 0 0 1.5708</pose>
+        <always_on>true</always_on>
+        <update_rate>2</update_rate>
+        <visualize>false</visualize>
+        <topic>/model/tethys/right_sonar</topic>
+        <lidar>
+            <visibility_mask>4294967293</visibility_mask>
+          <scan>
+            <horizontal>
+              <samples>10</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.35</min_angle>
+              <max_angle>0.35</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>5</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.25</min_angle>
+              <max_angle>0.25</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.1</min>
+            <max>10.0</max>
+            <resolution>0.01</resolution>
+          </range>
+        </lidar>
+      </sensor>
+
+      <sensor name="top_sonar" type="gpu_lidar">
+        <pose>0 0 0.15 0 -1.5708 0</pose>
+        <always_on>true</always_on>
+        <update_rate>2</update_rate>
+        <visualize>false</visualize>
+        <topic>/model/tethys/top_sonar</topic>
+        <lidar>
+            <visibility_mask>4294967293</visibility_mask>
+          <scan>
+            <horizontal>
+              <samples>5</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.25</min_angle>
+              <max_angle>0.25</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>5</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.25</min_angle>
+              <max_angle>0.25</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.1</min>
+            <max>10.0</max>
+            <resolution>0.01</resolution>
+          </range>
+        </lidar>
+      </sensor>
+
+    <sensor name="collision_contacts" type="contact"><always_on>true</always_on><update_rate>20</update_rate><contact><collision>main_body_buoyancy</collision></contact></sensor>
+<sensor name="review_contacts" type="contact"><always_on>true</always_on><update_rate>20</update_rate><topic>/model/tethys/review_contacts</topic><contact><collision>main_body_buoyancy</collision></contact></sensor></link>
+
+    <link name="horizontal_fins">
+      <pose>1.05 0 0 0 0 0</pose>
+      <inertial>
+        <mass>0.2</mass>
+        <inertia>
+          <ixx>0.0007924568755</ixx>
+          <ixy>-0.0000000002674</ixy>
+          <ixz>0.0003978158176</ixz>
+          <iyy>0.0010546736475</iyy>
+          <iyz>-0.0000000006729</iyz>
+          <izz>0.0002633558262</izz>
+        </inertia>
+      </inertial>
+
+      <collision name="horizontal_fins_buoyancy"><geometry><box><size>0.1 0.1 0.019512195121951216 </size></box></geometry></collision>
+
+      <visual name="visual">
+        <pose>-1.05 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://tethys/meshes/tethys.dae</uri>
+            <submesh>
+              <name>Fins_Horizontal</name>
+              <center>false</center>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0</diffuse>
+          <specular>1.0 1.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>/home/federico/ros2_tethys/src/lrauv_description/models/tethys/materials/textures/Tethys_Albedo.png</albedo_map>
+              <normal_map>/home/federico/ros2_tethys/src/lrauv_description/models/tethys/materials/textures/Tethys_Normal.png</normal_map>
+              <metalness_map>/home/federico/ros2_tethys/src/lrauv_description/models/tethys/materials/textures/Tethys_Metalness.png</metalness_map>
+              <roughness_map>/home/federico/ros2_tethys/src/lrauv_description/models/tethys/materials/textures/Tethys_Roughness.png</roughness_map>
+            </metal>
+          </pbr>
+          <script>
+            <uri>model://tethys/materials/scripts/</uri>
+            <uri>model://tethys/materials/textures/</uri>
+            <name>tethys/Tethys_Diffuse</name>
+          </script>
+        </material>
+      </visual>
+    <sensor name="collision_contacts" type="contact"><always_on>true</always_on><update_rate>20</update_rate><contact><collision>horizontal_fins_buoyancy</collision></contact></sensor>
+<sensor name="review_contacts" type="contact"><always_on>true</always_on><update_rate>20</update_rate><topic>/model/tethys/review_contacts</topic><contact><collision>horizontal_fins_buoyancy</collision></contact></sensor></link>
+
+    
+    <link name="vertical_fins">
+      <pose>1.05 0 0 0 0 0</pose>
+      <inertial>
+        <mass>0.2</mass>
+        <inertia>
+          <ixx>0.0007924568755</ixx>
+          <ixy>-0.0000000002674</ixy>
+          <ixz>0.0003978158176</ixz>
+          <iyy>0.0010546736475</iyy>
+          <iyz>-0.0000000006729</iyz>
+          <izz>0.0002633558262</izz>
+        </inertia>
+      </inertial>
+
+      <collision name="vertical_fin_buoyancy"><geometry><box><size>0.1 0.1 0.019512195121951216 </size></box></geometry></collision>
+
+      <visual name="visual">
+        <pose>-1.05 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://tethys/meshes/tethys.dae</uri>
+            <submesh>
+              <name>Fins_vertical</name>
+              <center>false</center>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0</diffuse>
+          <specular>1.0 1.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>/home/federico/ros2_tethys/src/lrauv_description/models/tethys/materials/textures/Tethys_Albedo.png</albedo_map>
+              <normal_map>/home/federico/ros2_tethys/src/lrauv_description/models/tethys/materials/textures/Tethys_Normal.png</normal_map>
+              <metalness_map>/home/federico/ros2_tethys/src/lrauv_description/models/tethys/materials/textures/Tethys_Metalness.png</metalness_map>
+              <roughness_map>/home/federico/ros2_tethys/src/lrauv_description/models/tethys/materials/textures/Tethys_Roughness.png</roughness_map>
+            </metal>
+          </pbr>
+          <script>
+            <uri>model://tethys/materials/scripts/</uri>
+            <uri>model://tethys/materials/textures/</uri>
+            <name>tethys/Tethys_Diffuse</name>
+          </script>
+        </material>
+      </visual>
+    <sensor name="collision_contacts" type="contact"><always_on>true</always_on><update_rate>20</update_rate><contact><collision>vertical_fin_buoyancy</collision></contact></sensor>
+<sensor name="review_contacts" type="contact"><always_on>true</always_on><update_rate>20</update_rate><topic>/model/tethys/review_contacts</topic><contact><collision>vertical_fin_buoyancy</collision></contact></sensor></link>
+
+    
+    <link name="propeller">
+      <pose>1.43162 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 1.570796 0 0</pose>
+        <mass>0.09</mass>
+        <inertia>
+          <ixx>0.000143971303</ixx>
+          <ixy>0.000000000008</ixy>
+          <ixz>-0.000000000224</ixz>
+          <iyy>0.000140915448</iyy>
+          <iyz>-0.000025236433</iyz>
+          <izz>0.000033571862</izz>
+        </inertia>
+      </inertial>
+
+      <collision name="propeller_buoyancy"><geometry><box><size>0.1 0.1 0.008780487804878046 </size></box></geometry></collision>
+
+      <visual name="visual">
+        <pose>-1.43162 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://tethys/meshes/tethys.dae</uri>
+            <submesh>
+              <name>Prop</name>
+              <center>false</center>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0</diffuse>
+          <specular>1.0 1.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>/home/federico/ros2_tethys/src/lrauv_description/models/tethys/materials/textures/Tethys_Albedo.png</albedo_map>
+              <normal_map>/home/federico/ros2_tethys/src/lrauv_description/models/tethys/materials/textures/Tethys_Normal.png</normal_map>
+              <metalness_map>/home/federico/ros2_tethys/src/lrauv_description/models/tethys/materials/textures/Tethys_Metalness.png</metalness_map>
+              <roughness_map>/home/federico/ros2_tethys/src/lrauv_description/models/tethys/materials/textures/Tethys_Roughness.png</roughness_map>
+            </metal>
+          </pbr>
+          <script>
+            <uri>model://tethys/materials/scripts/</uri>
+            <uri>model://tethys/materials/textures/</uri>
+            <name>tethys/Tethys_Diffuse</name>
+          </script>
+        </material>
+      </visual>
+    <sensor name="collision_contacts" type="contact"><always_on>true</always_on><update_rate>20</update_rate><contact><collision>propeller_buoyancy</collision></contact></sensor>
+<sensor name="review_contacts" type="contact"><always_on>true</always_on><update_rate>20</update_rate><topic>/model/tethys/review_contacts</topic><contact><collision>propeller_buoyancy</collision></contact></sensor></link>
+
+    
+    
+    <link name="battery">
+      
+
+      <inertial>
+        
+        <pose>-0.563 0 0 0 0 0</pose>
+        <mass>31.7307</mass>
+        <inertia>
+          <ixx>0.2327</ixx>
+          <ixy>0</ixy>
+          <ixz>-0.0004</ixz>
+          <iyy>1.0930</iyy>
+          <iyz>0</iyz>
+          <izz>1.0344</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.6489446 0.24638 0.17415</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.0 0.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 1.0 1.0</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="buoyancy_engine">
+
+  <pose>0.35 0 0 0 0 0</pose>
+
+  <inertial>
+    <pose>0 0 0 0 0 0</pose>
+    <mass>0.3</mass>
+    <inertia>
+      <ixx>0.000143971303</ixx>
+      <ixy>0.000000000008</ixy>
+      <ixz>-0.000000000224</ixz>
+      <iyy>0.000140915448</iyy>
+      <iyz>-0.000025236433</iyz>
+      <izz>0.000033571862</izz>
+    </inertia>
+  </inertial>
+
+  <collision name="buoyancy_engine">
+    <geometry>
+      <box>
+        <size>0.1 0.1 0.029268292682926824</size>
+      </box>
+    </geometry>
+  </collision>
+
+<sensor name="collision_contacts" type="contact"><always_on>true</always_on><update_rate>20</update_rate><contact><collision>buoyancy_engine</collision></contact></sensor>
+<sensor name="review_contacts" type="contact"><always_on>true</always_on><update_rate>20</update_rate><topic>/model/tethys/review_contacts</topic><contact><collision>buoyancy_engine</collision></contact></sensor></link>
+
+    <link name="acoustic_transponder">
+      
+      <pose degrees="true">0 0 0 0 0 180</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.01</mass>
+        <inertia>
+          <ixx>0.000143971303</ixx>
+          <ixy>0.000000000008</ixy>
+          <ixz>-0.000000000224</ixz>
+          <iyy>0.000140915448</iyy>
+          <iyz>-0.000025236433</iyz>
+          <izz>0.000033571862</izz>
+        </inertia>
+      </inertial>
+      <collision name="acoustic_transponder_col"><geometry><box><size>0.1 0.1 0.0009756097560975609 </size></box></geometry></collision>
+    <sensor name="collision_contacts" type="contact"><always_on>true</always_on><update_rate>20</update_rate><contact><collision>acoustic_transponder_col</collision></contact></sensor>
+<sensor name="review_contacts" type="contact"><always_on>true</always_on><update_rate>20</update_rate><topic>/model/tethys/review_contacts</topic><contact><collision>acoustic_transponder_col</collision></contact></sensor></link>
+
+    
+    <joint name="acoustic_transponder_joint" type="fixed">
+      <pose>0 0 0 0 0 0</pose>
+      <parent>base_link</parent>
+      <child>acoustic_transponder</child>
+    </joint>
+    <joint name="buoyancy_engine_joint" type="fixed">
+      <pose>0 0 0 0 0 0</pose>
+      <parent>base_link</parent>
+      <child>buoyancy_engine</child>
+    </joint>
+    <joint name="horizontal_fins_joint" type="revolute">
+      <pose>0 0 0 0 0 0</pose>
+      <parent>base_link</parent>
+      <child>horizontal_fins</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-0.261799</lower>
+          <upper>0.261799</upper>
+          <effort>-1</effort>
+          <velocity>-1</velocity>
+        </limit>
+      </axis>
+    </joint>
+
+    <joint name="vertical_fins_joint" type="revolute">
+      <pose degrees="true">0 0 0   180 0 0</pose>
+      <parent>base_link</parent>
+      <child>vertical_fins</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-0.523599</lower>
+	  <upper>0.523599</upper>
+          <effort>-1</effort>
+          <velocity>-1</velocity>
+        </limit>
+      </axis>
+    </joint>
+
+    <joint name="propeller_joint" type="revolute">
+      <pose degrees="true">0 0 0   0 180 0</pose>
+      <parent>base_link</parent>
+      <child>propeller</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1e+12</lower>
+          <upper>1e+12</upper>
+          <effort>1e6</effort>
+          <velocity>-1</velocity>
+        </limit>
+      </axis>
+    </joint>
+
+    
+    <joint name="battery_joint" type="prismatic">
+      <pose degrees="true">0 0 0   0 0 180</pose>
+      <parent>base_link</parent>
+      <child>battery</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-0.03</lower>
+          <upper>0.03</upper>
+          <effort>1e6</effort>
+          <velocity>0.0007</velocity>
+        </limit>
+      </axis>
+    </joint>
+
+    
+    <link name="drop_weight">
+      <pose>0.128 0 0 0 0 0</pose>
+      <inertial>
+        <mass>1</mass>
+        <inertia>
+          <ixx>0.000143971303</ixx>
+          <iyy>0.000140915448</iyy>
+          <izz>0.000033571862</izz>
+        </inertia>
+      </inertial>
+    </link>
+  <joint name="drop_weight_joint" type="fixed">
+      <parent>base_link</parent><child>drop_weight</child>
+    </joint>      <plugin filename="libignition-gazebo-hydrodynamics-system.so" name="ignition::gazebo::systems::Hydrodynamics">
+        <link_name>base_link</link_name>
+        <disable_coriolis>true</disable_coriolis>
+        <xDotU>-4.876161</xDotU>
+        <yDotV>-126.324739</yDotV>
+        <zDotW>-126.324739</zDotW>
+        <kDotP>0</kDotP>
+        <mDotQ>-33.46</mDotQ>
+        <nDotR>-33.46</nDotR>
+        <xUabsU>-6.2282</xUabsU>
+        <xU>0</xU>
+        <yVabsV>-601.27</yVabsV>
+        <yV>0</yV>
+        <zWabsW>-400.00</zWabsW>
+        <zW>-30</zW>
+        <kPabsP>-200.0</kPabsP>
+        <kP>-30.0</kP>
+        <mQabsQ>-600</mQabsQ>
+        <mQ>-100</mQ>
+        <nRabsR>-200.0</nRabsR>
+        <nR>0</nR>
+      </plugin>
+
+      <plugin filename="libignition-gazebo-buoyancy-engine-system.so" name="ignition::gazebo::systems::BuoyancyEngine">
+        <link_name>buoyancy_engine</link_name>
+        <fluid_density>1025</fluid_density>
+        <min_volume>0.000080</min_volume>
+        <neutral_volume>0.0034</neutral_volume>
+        <default_volume>0.0034</default_volume>
+        <max_volume>0.004</max_volume>
+        <max_inflation_rate>0.000003</max_inflation_rate>
+      </plugin>
+
+    <plugin filename="libignition-gazebo-thruster-system.so" name="ignition::gazebo::systems::Thruster">
+      <joint_name>propeller_joint</joint_name>
+      <thrust_coefficient>0.004312328425753156</thrust_coefficient>
+      <fluid_density>1025</fluid_density>
+      <propeller_diameter>0.2</propeller_diameter>
+      <velocity_control>true</velocity_control>
+    </plugin>
+
+    <plugin filename="libignition-gazebo-joint-position-controller-system.so" name="ignition::gazebo::systems::JointPositionController">
+      <joint_name>vertical_fins_joint</joint_name>
+      <p_gain>10.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.5</d_gain>
+    </plugin>
+
+    <plugin filename="libignition-gazebo-joint-position-controller-system.so" name="ignition::gazebo::systems::JointPositionController">
+      <joint_name>horizontal_fins_joint</joint_name>
+      <p_gain>10.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.5</d_gain>
+    </plugin>
+
+    <plugin filename="libignition-gazebo-lift-drag-system.so" name="ignition::gazebo::systems::LiftDrag">
+      <air_density>1025</air_density>
+      <cla>60.0</cla>
+      <cla_stall>-50.0</cla_stall>
+      <cda>0.2</cda>
+      <cda_stall>0.03</cda_stall>
+      <alpha_stall>0.17</alpha_stall>
+      <a0>0</a0>
+      <area>0.08</area>
+      <upward>0 1 0</upward>
+      <forward>1 0 0</forward>
+      <link_name>vertical_fins</link_name>
+      <cp>0 0 0</cp>
+    </plugin>
+
+    <plugin filename="libignition-gazebo-lift-drag-system.so" name="ignition::gazebo::systems::LiftDrag">
+      <air_density>1025</air_density>
+      <cla>12.0</cla>
+      <cla_stall>-1.1</cla_stall>
+      <cda>0.2</cda>
+      <cda_stall>0.03</cda_stall>
+      <alpha_stall>0.40</alpha_stall>
+      <a0>0</a0>
+      <area>0.05</area>
+      <upward>0 0 1</upward>
+      <forward>1 0 0</forward>
+      <link_name>horizontal_fins</link_name>
+      <cp>0 0 0</cp>
+    </plugin>
+    </model>
+
+    
+    <model name="fondale">
+      <static>true</static>
+      <pose>0 0 -0.25 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>30.0 120.0 0.5</size></box></geometry></collision>
+        <visual name="visual">
+          <geometry><box><size>30.0 120.0 0.5</size></box></geometry>
+          <material><ambient>0.5 0.4 0.3 1</ambient><diffuse>0.5 0.4 0.3 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    
+    <model name="vasca">
+      <static>true</static>
+      <link name="walls">
+        <collision name="n_c"><pose>0 60.0 10.0 0 0 0</pose><geometry><box><size>30.0 0.5 20.0</size></box></geometry></collision>
+        <visual name="n_v"><pose>0 60.0 10.0 0 0 0</pose><geometry><box><size>30.0 0.5 20.0</size></box></geometry><material><ambient>0 0.2 1 0.30</ambient><diffuse>0 0.2 1 0.30</diffuse></material></visual>
+        <collision name="s_c"><pose>0 -60.0 10.0 0 0 0</pose><geometry><box><size>30.0 0.5 20.0</size></box></geometry></collision>
+        <visual name="s_v"><pose>0 -60.0 10.0 0 0 0</pose><geometry><box><size>30.0 0.5 20.0</size></box></geometry><material><ambient>0 0.2 1 0.30</ambient><diffuse>0 0.2 1 0.30</diffuse></material></visual>
+        <collision name="e_c"><pose>15.0 0 10.0 0 0 0</pose><geometry><box><size>0.5 120.0 20.0</size></box></geometry></collision>
+        <visual name="e_v"><pose>15.0 0 10.0 0 0 0</pose><geometry><box><size>0.5 120.0 20.0</size></box></geometry><material><ambient>0 0.2 1 0.30</ambient><diffuse>0 0.2 1 0.30</diffuse></material></visual>
+        <collision name="w_c"><pose>-15.0 0 10.0 0 0 0</pose><geometry><box><size>0.5 120.0 20.0</size></box></geometry></collision>
+        <visual name="w_v"><pose>-15.0 0 10.0 0 0 0</pose><geometry><box><size>0.5 120.0 20.0</size></box></geometry><material><ambient>0 0.2 1 0.30</ambient><diffuse>0 0.2 1 0.30</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="superficie_acqua">
+      <static>true</static>
+      <pose>0 0 20.0 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>30.0 120.0 0.05</size></box></geometry>
+          <material><ambient>0 0.4 0.8 0.20</ambient><diffuse>0 0.4 0.8 0.20</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="soffitto">
+      <static>true</static>
+      <link name="link">
+        <pose>0 0 20.25 0 0 0</pose>
+        <collision name="collision"><geometry><box><size>30.0 120.0 0.5</size></box></geometry></collision>
+      </link>
+    </model>
+
+    
+    <model name="target_0">
+      <static>true</static>
+      <pose>0.00 50.00 8.00 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          
+          <visibility_flags>2</visibility_flags>
+          <geometry><sphere><radius>3.0</radius></sphere></geometry>
+          <material>
+            <ambient>1.0 0.0 0.0 0.25</ambient>
+            <diffuse>1.0 0.0 0.0 0.25</diffuse>
+            <specular>0.5 0.0 0.0 0.25</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    
+    <model name="ostacoli">
+      <static>true</static>
+
+      <link name="p0"><pose>0.5 -15.0 6.0 0 0 0</pose><collision name="c"><geometry><cylinder><radius>1.4</radius><length>12.0</length></cylinder></geometry></collision><visual name="v"><geometry><cylinder><radius>1.4</radius><length>12.0</length></cylinder></geometry><material><ambient>0.950 0.300 0.080 1</ambient><diffuse>0.950 0.300 0.080 1</diffuse><specular>0.25 0.25 0.25 1</specular><emissive>0.380 0.120 0.032 1</emissive></material></visual></link></model>
+
+  <model name="telecamera_presentazione"><static>true</static><pose>0.0 -60.0 17.0 0 0 0</pose><link name="link"><sensor name="alto_centrale_v2" type="camera"><pose>-1.5 1 2.5 0.0000 0.6624 1.5708</pose><always_on>true</always_on><update_rate>30</update_rate><topic>/presentazione/alto_centrale_v2</topic><camera><horizontal_fov>1.5</horizontal_fov><image><width>1920</width><height>1080</height><format>R8G8B8</format></image><clip><near>0.1</near><far>250</far></clip><anti_aliasing>4</anti_aliasing><save enabled="true"><path>/dev/shm/tethys_demo/finale_run7/alto_centrale_v2</path></save></camera></sensor></link><plugin filename="/home/federico/ros2_tethys/presentazione_tesi/strumenti/telecamera_plugin/build/libSeguiDroneCamera.so" name="demo::SeguiDroneCamera"><offset_y>-10.0</offset_y><x>0.0</x><z>17.0</z><tau>1.0</tau><target>tethys</target></plugin></model></world>
+</sdf>

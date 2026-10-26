@@ -1,0 +1,147 @@
+# ros_gz_bridge config per drone singolo (tethys).
+# Mappa topic ROS2 validi ai topic Ignition effettivi.
+# Le pinne usano il formato /0/cmd_pos (default JPC Fortress senza <topic> esplicito).
+
+# Pinne verticali: ROS2 → Ignition
+- ros_topic_name: "/model/tethys/vertical_fins/cmd_pos"
+  gz_topic_name: "/model/tethys/joint/vertical_fins_joint/0/cmd_pos"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "ignition.msgs.Double"
+  direction: ROS_TO_GZ
+
+# Pinne orizzontali: ROS2 → Ignition
+- ros_topic_name: "/model/tethys/horizontal_fins/cmd_pos"
+  gz_topic_name: "/model/tethys/joint/horizontal_fins_joint/0/cmd_pos"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "ignition.msgs.Double"
+  direction: ROS_TO_GZ
+
+# Propulsore: ROS2 → Ignition
+- ros_topic_name: "/model/tethys/joint/propeller_joint/cmd_thrust"
+  gz_topic_name: "/model/tethys/joint/propeller_joint/cmd_thrust"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "ignition.msgs.Double"
+  direction: ROS_TO_GZ
+
+# Sonar: Ignition → ROS2
+- ros_topic_name: "/model/tethys/frontal_sonar/points"
+  gz_topic_name: "/model/tethys/frontal_sonar/points"
+  ros_type_name: "sensor_msgs/msg/PointCloud2"
+  gz_type_name: "ignition.msgs.PointCloudPacked"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/model/tethys/left_sonar/points"
+  gz_topic_name: "/model/tethys/left_sonar/points"
+  ros_type_name: "sensor_msgs/msg/PointCloud2"
+  gz_type_name: "ignition.msgs.PointCloudPacked"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/model/tethys/right_sonar/points"
+  gz_topic_name: "/model/tethys/right_sonar/points"
+  ros_type_name: "sensor_msgs/msg/PointCloud2"
+  gz_type_name: "ignition.msgs.PointCloudPacked"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/model/tethys/top_sonar/points"
+  gz_topic_name: "/model/tethys/top_sonar/points"
+  ros_type_name: "sensor_msgs/msg/PointCloud2"
+  gz_type_name: "ignition.msgs.PointCloudPacked"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/model/tethys/bottom_sonar/points"
+  gz_topic_name: "/model/tethys/bottom_sonar/points"
+  ros_type_name: "sensor_msgs/msg/PointCloud2"
+  gz_type_name: "ignition.msgs.PointCloudPacked"
+  direction: GZ_TO_ROS
+
+# Posa: Ignition → ROS2
+- ros_topic_name: "/world/buoyant_tethys/dynamic_pose/info"
+  gz_topic_name: "/world/buoyant_tethys/dynamic_pose/info"
+  ros_type_name: "tf2_msgs/msg/TFMessage"
+  gz_type_name: "ignition.msgs.Pose_V"
+  direction: GZ_TO_ROS
+
+# Clock: Ignition → ROS2
+- ros_topic_name: "/clock"
+  gz_topic_name: "/clock"
+  ros_type_name: "rosgraph_msgs/msg/Clock"
+  gz_type_name: "ignition.msgs.Clock"
+  direction: GZ_TO_ROS
+
+# Physical contacts: base_link
+- ros_topic_name: "/model/tethys/contacts/base_link"
+  gz_topic_name: "/world/buoyant_tethys/model/tethys/link/base_link/sensor/collision_contacts/contact"
+  ros_type_name: "ros_gz_interfaces/msg/Contacts"
+  gz_type_name: "ignition.msgs.Contacts"
+  direction: GZ_TO_ROS
+
+# Physical contacts: horizontal_fins
+- ros_topic_name: "/model/tethys/contacts/horizontal_fins"
+  gz_topic_name: "/world/buoyant_tethys/model/tethys/link/horizontal_fins/sensor/collision_contacts/contact"
+  ros_type_name: "ros_gz_interfaces/msg/Contacts"
+  gz_type_name: "ignition.msgs.Contacts"
+  direction: GZ_TO_ROS
+
+# Physical contacts: vertical_fins
+- ros_topic_name: "/model/tethys/contacts/vertical_fins"
+  gz_topic_name: "/world/buoyant_tethys/model/tethys/link/vertical_fins/sensor/collision_contacts/contact"
+  ros_type_name: "ros_gz_interfaces/msg/Contacts"
+  gz_type_name: "ignition.msgs.Contacts"
+  direction: GZ_TO_ROS
+
+# Physical contacts: propeller
+- ros_topic_name: "/model/tethys/contacts/propeller"
+  gz_topic_name: "/world/buoyant_tethys/model/tethys/link/propeller/sensor/collision_contacts/contact"
+  ros_type_name: "ros_gz_interfaces/msg/Contacts"
+  gz_type_name: "ignition.msgs.Contacts"
+  direction: GZ_TO_ROS
+
+# Physical contacts: buoyancy_engine
+- ros_topic_name: "/model/tethys/contacts/buoyancy_engine"
+  gz_topic_name: "/world/buoyant_tethys/model/tethys/link/buoyancy_engine/sensor/collision_contacts/contact"
+  ros_type_name: "ros_gz_interfaces/msg/Contacts"
+  gz_type_name: "ignition.msgs.Contacts"
+  direction: GZ_TO_ROS
+
+# Physical contacts: acoustic_transponder
+- ros_topic_name: "/model/tethys/contacts/acoustic_transponder"
+  gz_topic_name: "/world/buoyant_tethys/model/tethys/link/acoustic_transponder/sensor/collision_contacts/contact"
+  ros_type_name: "ros_gz_interfaces/msg/Contacts"
+  gz_type_name: "ignition.msgs.Contacts"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/model/tethys/review_contacts/base_link"
+  gz_topic_name: "/world/buoyant_tethys/model/tethys/link/base_link/sensor/review_contacts/contact"
+  ros_type_name: "ros_gz_interfaces/msg/Contacts"
+  gz_type_name: "ignition.msgs.Contacts"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/model/tethys/review_contacts/horizontal_fins"
+  gz_topic_name: "/world/buoyant_tethys/model/tethys/link/horizontal_fins/sensor/review_contacts/contact"
+  ros_type_name: "ros_gz_interfaces/msg/Contacts"
+  gz_type_name: "ignition.msgs.Contacts"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/model/tethys/review_contacts/vertical_fins"
+  gz_topic_name: "/world/buoyant_tethys/model/tethys/link/vertical_fins/sensor/review_contacts/contact"
+  ros_type_name: "ros_gz_interfaces/msg/Contacts"
+  gz_type_name: "ignition.msgs.Contacts"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/model/tethys/review_contacts/propeller"
+  gz_topic_name: "/world/buoyant_tethys/model/tethys/link/propeller/sensor/review_contacts/contact"
+  ros_type_name: "ros_gz_interfaces/msg/Contacts"
+  gz_type_name: "ignition.msgs.Contacts"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/model/tethys/review_contacts/buoyancy_engine"
+  gz_topic_name: "/world/buoyant_tethys/model/tethys/link/buoyancy_engine/sensor/review_contacts/contact"
+  ros_type_name: "ros_gz_interfaces/msg/Contacts"
+  gz_type_name: "ignition.msgs.Contacts"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/model/tethys/review_contacts/acoustic_transponder"
+  gz_topic_name: "/world/buoyant_tethys/model/tethys/link/acoustic_transponder/sensor/review_contacts/contact"
+  ros_type_name: "ros_gz_interfaces/msg/Contacts"
+  gz_type_name: "ignition.msgs.Contacts"
+  direction: GZ_TO_ROS
