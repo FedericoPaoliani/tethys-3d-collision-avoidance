@@ -16,6 +16,7 @@ Il video mostra avvicinamento, deviazione, superamento e ripresa in uno scenario
 
 | Materiale | Collegamento |
 |---|---|
+| Tesi definitiva | [Leggi il PDF](tesi/L31_paoliani_tirocinio.pdf) |
 | Codice ROS 2 e risorse Gazebo | [Workspace](progetto/ros2_tethys/) |
 | Funzionamento del sistema | [Guida tecnica](documentazione/PROGETTO.md) |
 | Preparazione e avvio su Ubuntu | [Istruzioni](documentazione/AVVIO.md) |
@@ -26,7 +27,7 @@ Il video mostra avvicinamento, deviazione, superamento e ripresa in uno scenario
 | Provenienza e integrità dei file | [Inventario](inventario/FILE_PUBBLICATI.csv) · [Preparazione](documentazione/PUBBLICAZIONE.md) |
 | Componenti di terzi | [Attribuzioni e licenze](THIRD_PARTY_NOTICES.md) |
 
-Tesi definitiva in PDF, relazione finale del tirocinio e slide finali **non sono ancora incluse** nella raccolta disponibile.
+La tesi definitiva è disponibile in [PDF](tesi/L31_paoliani_tirocinio.pdf), nella versione indicata dall’autore. Le slide finali non sono ancora incluse; la raccolta non contiene una relazione di tirocinio distinta da questo elaborato.
 
 ## Sei scenari e risultati
 

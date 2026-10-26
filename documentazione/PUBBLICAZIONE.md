@@ -23,3 +23,7 @@ Integrità della copia, controllo di pattern comuni di credenziali, parsing JSON
 ## Materiali ancora da aggiungere
 
 Tesi definitiva in PDF, relazione finale del tirocinio e presentazione finale non erano nella raccolta USB. Non sono state ricostruite o sostituite con bozze.
+
+## Aggiunta della tesi definitiva
+
+Aggiunto `tesi/L31_paoliani_tirocinio.pdf`, indicato e fornito dall’autore come versione definitiva. Il documento di 70 pagine è pubblicato senza modifiche. Aggiornati README e inventario; restano da aggiungere le slide finali.
