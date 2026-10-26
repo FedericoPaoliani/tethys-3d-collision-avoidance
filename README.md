@@ -4,6 +4,17 @@ Progetto di tesi e tirocinio di **Federico Paoliani**: navigazione locale ed evi
 
 Il planner si ispira al Vector Field Histogram: combina cinque sonar simulati in un istogramma sferico **36 × 18**, valuta corridoi percorribili e waypoint locali, quindi genera comandi per pinne e propulsore. La validazione presentata è svolta **in simulazione**.
 
+## Video delle simulazioni
+
+Due nuove prove del **livello 1**, registrate il 26 ottobre 2026. Le anteprime aprono i file MP4; GitHub permette di scaricarli se non li riproduce direttamente.
+
+| Un drone · 57 secondi · 4× | Cinque droni · 82 secondi · 3× |
+|---|---|
+| [![Simulazione con un drone](video_simulazioni_finali/finali/tethys_1drone_livello1.jpg)](video_simulazioni_finali/finali/tethys_1drone_livello1.mp4) | [![Simulazione con cinque droni](video_simulazioni_finali/finali/tethys_5droni_livello1.jpg)](video_simulazioni_finali/finali/tethys_5droni_livello1.mp4) |
+| Il drone incontra una trappola locale e va in stallo. | Quattro droni raggiungono il goal; uno va in stallo. |
+
+**Esiti dichiarati:** nessuna delle due prove soddisfa il criterio di successo completo; i log non registrano contatti fisici. Questi video illustrano comportamento e limiti del sistema e sono separati dalle campagne della tesi. **[Dettagli, log e strumenti](video_simulazioni_finali/README.md)**.
+
 ## Guarda la dimostrazione
 
 [![Tethys durante la deviazione](progetto/ros2_tethys/presentazione_tesi/fotogrammi/Fase_2_deviazione_video8.0s_sim19.4s.png)](video_finali/Manovra_Collision_Avoidance_Tethys.mp4)

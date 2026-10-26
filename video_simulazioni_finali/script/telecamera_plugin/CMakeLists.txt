@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.10)
+project(segui_drone_camera CXX)
+set(CMAKE_CXX_STANDARD 17)
+find_package(ignition-gazebo6 REQUIRED)
+find_package(ignition-plugin1 REQUIRED COMPONENTS register)
+add_library(TelecameraVideo SHARED TelecameraVideo.cc)
+target_link_libraries(TelecameraVideo ignition-gazebo6::core ignition-plugin1::register)
