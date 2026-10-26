@@ -1,0 +1,80 @@
+classDiagram
+    direction TB
+    class ROSNode["rclcpp::Node"]
+    class CollisionAvoidanceNode {
+        +CollisionAvoidanceNode()
+        -control_loop()
+        -sonar_callback(msg, id)
+        -pose_callback(msg)
+        -build_merged()
+        -preferred_dir() double
+        -create_local_waypoint(yaw_world, clearance)
+        -cmd(thr, az, el)
+        -publish_metrics()
+        -write_csv()
+    }
+    class VFHPlanner {
+        -sm_ : const SphHist reference
+        -state_ : const VehicleState reference
+        -wall_wx_ : double
+        -wall_wy_ : double
+        +forward_blocked() bool
+        +forward_min_range() double
+        +corridor_clearance(candidate_az) double
+        +find_escape(best_az, preferred_az) bool
+        +find_lookahead_escape(best_az, preferred_az, path_len_out) bool
+        +find_vertical_escape(new_depth, el_span_out, range_thresh) bool
+        +waypoint_arc_free(bearing, length) bool
+    }
+    class SphHist {
+        <<struct>>
+        +h : double grid 36x18
+        +min_r : double grid 36x18
+        +horizontal_points : vector
+        +last_time : double
+        +received : bool
+        +reset()
+        +az_idx(az) int
+        +el_idx(el) int
+        +smooth(raw, out)
+        +to_body(xs, ys, zs, id, xb, yb, zb)
+    }
+    class VehicleState {
+        <<struct>>
+        +x : double
+        +y : double
+        +z : double
+        +pitch : double
+        +roll : double
+        +yaw : double
+        +yaw_rate : double
+        +vz : double
+    }
+    class ObstacleMemory {
+        -points_ : deque of Point
+        -recovery_points_ : deque of Point
+        -recovery_active_ : bool
+        +observe(x, y, z, t)
+        +begin_recovery(t)
+        +end_recovery()
+        +clearance(x, y, z, yaw, t) double
+    }
+    class DepthTrim {
+        -integral_ : double
+        +update(error, vz, pitch, speed, enabled, dt) double
+    }
+    class Mode {
+        <<enumeration>>
+        CRUISE
+        ESCAPE
+        BRAKE
+    }
+    ROSNode <|-- CollisionAvoidanceNode
+    CollisionAvoidanceNode "1" *-- "1" VFHPlanner : planner_
+    CollisionAvoidanceNode "1" *-- "7" SphHist : raw_ x5 + merged_ + sm_
+    CollisionAvoidanceNode "1" *-- "1" VehicleState : state_
+    CollisionAvoidanceNode "1" *-- "1" ObstacleMemory : obstacle_memory_
+    CollisionAvoidanceNode "1" *-- "1" DepthTrim : depth_trim_
+    CollisionAvoidanceNode ..> Mode : mode_ - enum annidato
+    VFHPlanner --> "1" SphHist : sm_ - riferimento const
+    VFHPlanner --> "1" VehicleState : state_ - riferimento const

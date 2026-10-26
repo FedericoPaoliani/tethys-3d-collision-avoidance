@@ -19,6 +19,7 @@ Il video mostra avvicinamento, deviazione, superamento e ripresa in uno scenario
 | Tesi definitiva | [Leggi il PDF](tesi/L31_paoliani_tirocinio.pdf) |
 | Codice ROS 2 e risorse Gazebo | [Workspace](progetto/ros2_tethys/) |
 | Funzionamento del sistema | [Guida tecnica](documentazione/PROGETTO.md) |
+| Struttura del codice | [Diagramma UML delle classi](documentazione/uml/README.md) |
 | Preparazione e avvio su Ubuntu | [Istruzioni](documentazione/AVVIO.md) |
 | Sei scenari definitivi | [Mondi, parametri e comandi](inventario/SEI_SCENARI.md) |
 | Risultati delle prove | [Tabelle complete](risultati_finali/RISULTATI_TEST.md) · [Grafici](risultati_finali/grafici/) |
