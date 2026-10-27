@@ -4,16 +4,16 @@ Progetto di tesi e tirocinio di **Federico Paoliani**: navigazione locale ed evi
 
 Il planner si ispira al Vector Field Histogram: combina cinque sonar simulati in un istogramma sferico **36 × 18**, valuta corridoi percorribili e waypoint locali, quindi genera comandi per pinne e propulsore. La validazione presentata è svolta **in simulazione**.
 
-## Video delle simulazioni
+## Video delle simulazioni riuscite
 
-Due nuove prove del **livello 1**, registrate il 26 ottobre 2026. Le anteprime aprono i file MP4; GitHub permette di scaricarli se non li riproduce direttamente.
+Due prove del **livello 1**, registrate il 27 ottobre 2026. Clicca sulle anteprime per aprire o scaricare gli MP4.
 
-| Un drone · 57 secondi · 4× | Cinque droni · 82 secondi · 3× |
+| Un drone · 61 secondi · 3× | Cinque droni · 84 secondi · 2× |
 |---|---|
-| [![Simulazione con un drone](video_simulazioni_finali/finali/tethys_1drone_livello1.jpg)](video_simulazioni_finali/finali/tethys_1drone_livello1.mp4) | [![Simulazione con cinque droni](video_simulazioni_finali/finali/tethys_5droni_livello1.jpg)](video_simulazioni_finali/finali/tethys_5droni_livello1.mp4) |
-| Il drone incontra una trappola locale e va in stallo. | Quattro droni raggiungono il goal; uno va in stallo. |
+| [![Un drone al goal](video_successi_livello1/finali/tethys_1drone_livello1_successo.jpg)](video_successi_livello1/finali/tethys_1drone_livello1_successo.mp4) | [![Cinque droni al goal](video_successi_livello1/finali/tethys_5droni_livello1_successo.jpg)](video_successi_livello1/finali/tethys_5droni_livello1_successo.mp4) |
+| **1/1 al goal**, successo al tentativo 17. | **5/5 al goal**, successo al tentativo 2. |
 
-**Esiti dichiarati:** nessuna delle due prove soddisfa il criterio di successo completo; i log non registrano contatti fisici. Questi video illustrano comportamento e limiti del sistema e sono separati dalle campagne della tesi. **[Dettagli, log e strumenti](video_simulazioni_finali/README.md)**.
+Sono nuove prove riuscite selezionate, separate dalle campagne della tesi: 16 tentativi precedenti falliti con un drone e 1 con cinque droni. Nessun contatto fisico registrato nelle due prove scelte. Le velocità indicate sono rispetto al tempo simulato. **[Dettagli, tentativi, log e montaggio](video_successi_livello1/README.md)**.
 
 ## Esplora il progetto
 
