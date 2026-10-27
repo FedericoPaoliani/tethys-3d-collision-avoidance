@@ -1,6 +1,16 @@
 # UML del codice di collision avoidance
 
-Diagramma ricavato dagli header e dal `CMakeLists.txt` del pacchetto `collision_avoidance`, nella versione del repository `4ce6b19`. Questa aggiunta modifica soltanto la documentazione, non il controllo o le simulazioni.
+Diagramma ricavato dagli header e dal `CMakeLists.txt` del pacchetto `collision_avoidance`, nel sorgente presente al commit `54a9355` (documentazione aggiornata il 27 ottobre 2026). Questa aggiunta modifica soltanto la documentazione, non il controllo o le simulazioni.
+
+## Percorso di lettura
+
+1. [Architettura e interfacce ROS 2](architettura.md): componenti, topic, tipi e tempi.
+2. Diagramma delle classi qui sotto: proprietà dei dati e responsabilità.
+3. [Sequenza del controllo](sequenza.md): ricezione, fusione, pianificazione e attuazione.
+4. [Stati e transizioni](stati.md): sintesi e indice di tutte le assegnazioni a `mode_`.
+5. [Header completi con riferimenti](riferimenti.md): dichiarazioni effettive per approfondire attributi e firme.
+
+I diagrammi delle classi, di sequenza e degli stati usano notazione UML resa con Mermaid. L'architettura è uno schema funzionale complementare. I diagrammi comportamentali sintetizzano il codice: non sostituiscono le condizioni complete dei numerosi rami di sicurezza. Nessuna modifica al codice o ai parametri delle simulazioni.
 
 ## Quale versione è pubblicata
 
@@ -20,6 +30,21 @@ classDiagram
     class ROSNode["rclcpp::Node"]
     class CollisionAvoidanceNode {
         +CollisionAvoidanceNode()
+        -raw_ : SphHist[5]
+        -merged_ : SphHist
+        -sm_ : SphHist
+        -state_ : VehicleState
+        -planner_ : VFHPlanner
+        -obstacle_memory_ : ObstacleMemory
+        -depth_trim_ : DepthTrim
+        -mode_ : Mode
+        -local_wp_active_ : bool
+        -vertical_escape_ : bool
+        -goal_active_ : bool
+        -goal_reached_ : bool
+        -stabilize_active_ : bool
+        -alt_recovery_active_ : bool
+        -circum_active_ : bool
         -control_loop()
         -sonar_callback(msg, id)
         -pose_callback(msg)
@@ -27,6 +52,10 @@ classDiagram
         -preferred_dir() double
         -create_local_waypoint(yaw_world, clearance)
         -cmd(thr, az, el)
+        -stop_actuators()
+        -create_local_waypoint_throttled(yaw_world, clearance, t)
+        -steer_limit(fwd_min) double
+        -lookahead_preferred_dir(fwd_min) double
         -publish_metrics()
         -write_csv()
     }
@@ -35,6 +64,15 @@ classDiagram
         -state_ : const VehicleState reference
         -wall_wx_ : double
         -wall_wy_ : double
+        -inner_wx_ : double
+        -inner_wy_ : double
+        -compute_az_min(az_min)
+        +set_walls(wx, wy)
+        +set_inner_walls(wx, wy)
+        +inner_wall_dist_in_dir(world_yaw) double
+        +wall_dist_in_dir(world_yaw) double
+        +wall_fwd_dist() double
+        +local_waypoint_length(bearing, clearance) double
         +forward_blocked() bool
         +forward_min_range() double
         +corridor_clearance(candidate_az) double
@@ -50,6 +88,9 @@ classDiagram
         +horizontal_points : vector
         +last_time : double
         +received : bool
+        +horizontal_points_valid : bool
+        +az_center(k) double
+        +el_center(l) double
         +reset()
         +az_idx(az) int
         +el_idx(el) int
@@ -95,6 +136,24 @@ classDiagram
     CollisionAvoidanceNode ..> Mode : mode_ - enum annidato
     VFHPlanner --> "1" SphHist : sm_ - riferimento const
     VFHPlanner --> "1" VehicleState : state_ - riferimento const
+    class MemoryPoint["ObstacleMemory::Point"] {
+        <<struct>>
+        +x : double
+        +y : double
+        +z : double
+        +t : double
+    }
+    class SensorId {
+        <<enumeration>>
+        FRONT
+        LEFT
+        RIGHT
+        BOTTOM
+        TOP
+        N_SENSORS
+    }
+    ObstacleMemory "1" *-- "0..*" MemoryPoint : points_ e recovery_points_
+    CollisionAvoidanceNode ..> SensorId : selezione sonar
 ```
 
 ### Come leggere le relazioni
@@ -105,7 +164,7 @@ classDiagram
 - I sette `SphHist` sono cinque istogrammi dei sensori, uno fuso e uno smussato. Non sono sette classi diverse.
 - `Mode` è un enum privato annidato in `CollisionAvoidanceNode`, non una classe di controllo autonoma.
 
-`ObstacleMemory` contiene anche il tipo privato annidato `Point` con `x`, `y`, `z`, `t`, usato dalle due code. È omesso dal disegno per mantenerlo leggibile.
+`ObstacleMemory` contiene anche il tipo privato annidato `Point` con `x`, `y`, `z`, `t`, usato dalle due code. È rappresentato nel disegno come tipo annidato privato; i suoi campi sono pubblici perché dichiarato con `struct`.
 
 ## Suddivisione effettiva nei file
 

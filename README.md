@@ -22,6 +22,25 @@ Il planner si ispira al Vector Field Histogram: combina cinque sonar simulati in
 
 La tesi definitiva è disponibile in [PDF](tesi/L31_paoliani_tirocinio.pdf), nella versione indicata dall’autore. Le slide finali non sono ancora incluse; la raccolta non contiene una relazione di tirocinio distinta da questo elaborato.
 
+## Architettura e UML
+
+Il sistema collega la percezione dei cinque sonar alla pianificazione locale e al controllo delle pinne e del propulsore. Ogni drone ha un'istanza del controller.
+
+```mermaid
+flowchart LR
+    S["Cinque sonar e posa"] --> N["CollisionAvoidanceNode"]
+    N --> H["SphHist: fusione e smoothing"]
+    H --> P["VFHPlanner: corridoi e direzioni"]
+    P --> N
+    N --> A["Pinne e propulsore"]
+    M["ObstacleMemory"] --> N
+    D["DepthTrim"] --> N
+```
+
+**[Apri la documentazione UML dettagliata](documentazione/uml/README.md)**: [classi](documentazione/uml/README.md#diagramma-delle-classi), [architettura e topic ROS 2](documentazione/uml/architettura.md), [sequenza del controllo](documentazione/uml/sequenza.md), [stati e transizioni](documentazione/uml/stati.md).
+
+Lo schema qui sopra riassume il flusso funzionale; il diagramma delle classi distingue composizione, ereditarietà e riferimenti. I file `sensors.cpp`, `navigation.cpp`, `motion_control.cpp` e `metrics.cpp` implementano parti della stessa classe `CollisionAvoidanceNode`.
+
 ## Sei scenari e risultati
 
 | Scenario | Livello | Ostacoli | Tentativi considerati | Successi | Tasso |

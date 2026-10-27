@@ -3,6 +3,21 @@ classDiagram
     class ROSNode["rclcpp::Node"]
     class CollisionAvoidanceNode {
         +CollisionAvoidanceNode()
+        -raw_ : SphHist[5]
+        -merged_ : SphHist
+        -sm_ : SphHist
+        -state_ : VehicleState
+        -planner_ : VFHPlanner
+        -obstacle_memory_ : ObstacleMemory
+        -depth_trim_ : DepthTrim
+        -mode_ : Mode
+        -local_wp_active_ : bool
+        -vertical_escape_ : bool
+        -goal_active_ : bool
+        -goal_reached_ : bool
+        -stabilize_active_ : bool
+        -alt_recovery_active_ : bool
+        -circum_active_ : bool
         -control_loop()
         -sonar_callback(msg, id)
         -pose_callback(msg)
@@ -10,6 +25,10 @@ classDiagram
         -preferred_dir() double
         -create_local_waypoint(yaw_world, clearance)
         -cmd(thr, az, el)
+        -stop_actuators()
+        -create_local_waypoint_throttled(yaw_world, clearance, t)
+        -steer_limit(fwd_min) double
+        -lookahead_preferred_dir(fwd_min) double
         -publish_metrics()
         -write_csv()
     }
@@ -18,6 +37,15 @@ classDiagram
         -state_ : const VehicleState reference
         -wall_wx_ : double
         -wall_wy_ : double
+        -inner_wx_ : double
+        -inner_wy_ : double
+        -compute_az_min(az_min)
+        +set_walls(wx, wy)
+        +set_inner_walls(wx, wy)
+        +inner_wall_dist_in_dir(world_yaw) double
+        +wall_dist_in_dir(world_yaw) double
+        +wall_fwd_dist() double
+        +local_waypoint_length(bearing, clearance) double
         +forward_blocked() bool
         +forward_min_range() double
         +corridor_clearance(candidate_az) double
@@ -33,6 +61,9 @@ classDiagram
         +horizontal_points : vector
         +last_time : double
         +received : bool
+        +horizontal_points_valid : bool
+        +az_center(k) double
+        +el_center(l) double
         +reset()
         +az_idx(az) int
         +el_idx(el) int
@@ -78,3 +109,21 @@ classDiagram
     CollisionAvoidanceNode ..> Mode : mode_ - enum annidato
     VFHPlanner --> "1" SphHist : sm_ - riferimento const
     VFHPlanner --> "1" VehicleState : state_ - riferimento const
+    class MemoryPoint["ObstacleMemory::Point"] {
+        <<struct>>
+        +x : double
+        +y : double
+        +z : double
+        +t : double
+    }
+    class SensorId {
+        <<enumeration>>
+        FRONT
+        LEFT
+        RIGHT
+        BOTTOM
+        TOP
+        N_SENSORS
+    }
+    ObstacleMemory "1" *-- "0..*" MemoryPoint : points_ e recovery_points_
+    CollisionAvoidanceNode ..> SensorId : selezione sonar

@@ -1,0 +1,28 @@
+flowchart LR
+    World["Gazebo Fortress: mondo SDF e fisica"]
+    Sonar["5 sonar per veicolo"]
+    Bridge["ros_gz_bridge"]
+    Node["CollisionAvoidanceNode: una istanza per drone"]
+    Act["Pinne verticali, pinne orizzontali, propulsore"]
+    Planner["VFHPlanner"]
+    Hist["SphHist: 5 raw + merged + sm"]
+    State["VehicleState"]
+    Mem["ObstacleMemory"]
+    Trim["DepthTrim"]
+    Harness["Harness delle prove: review_corridor / review_multi"]
+    Files["summary.json, metadata.json, telemetry.csv e log"]
+    World --> Sonar --> Bridge
+    World -->|posa, contatti, clock| Bridge
+    Bridge -->|messaggi ROS 2| Node
+    Node --> Hist
+    Node --> State
+    Node --> Mem
+    Node --> Trim
+    Node --> Planner
+    Hist -->|sm per riferimento const| Planner
+    State -->|riferimento const| Planner
+    Node -->|comandi Float64| Bridge
+    Bridge --> Act --> World
+    Bridge -->|dati della prova| Harness
+    Harness -->|avvio e supervisione processi| Node
+    Harness --> Files

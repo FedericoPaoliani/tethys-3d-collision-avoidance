@@ -1,0 +1,40 @@
+sequenceDiagram
+    participant B as Bridge ROS-Gazebo
+    participant N as CollisionAvoidanceNode
+    participant H as SphHist
+    participant M as ObstacleMemory
+    participant P as VFHPlanner
+    participant D as DepthTrim
+    Note over B,N: Callback asincrone rispetto al timer: ordine illustrativo
+    B->>N: PointCloud2 dei cinque sonar
+    N->>H: sonar_callback: aggiorna raw_[id]
+    N->>M: observe: punti in coordinate world
+    B->>N: TFMessage della posa
+    N->>N: pose_callback: aggiorna state_
+    loop Ogni 200 ms sul clock del nodo
+        N->>N: control_loop / build_merged
+        N->>H: smooth(merged_, sm_)
+        alt Dati mancanti, vecchi o warmup
+            N->>B: stop_actuators: comandi di arresto
+        else Dati utilizzabili
+            N->>N: aggiorna metriche e verifica goal
+            alt Goal raggiunto
+                N->>B: stop_actuators
+                N->>N: write_csv e arresto del nodo
+            else Navigazione
+                N->>P: clearance, pareti e ricerca direzione quando necessaria
+                P-->>N: distanze e candidati di fuga
+                N->>N: gestisce mode_, waypoint e protezioni
+                opt Controllo quota in cmd
+                    N->>D: update(error, vz, pitch, speed, enabled, dt)
+                    D-->>N: correzione integrale
+                end
+                opt Protezione retromarcia
+                    N->>M: clearance lungo la direzione posteriore
+                    M-->>N: distanza disponibile
+                end
+                N->>B: cmd: spinta e posizione pinne
+            end
+        end
+    end
+    Note over N: Timer separato: publish_metrics ogni 5 secondi reali

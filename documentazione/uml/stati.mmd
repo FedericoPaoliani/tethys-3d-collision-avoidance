@@ -1,0 +1,18 @@
+stateDiagram-v2
+    [*] --> CRUISE
+    CRUISE --> ESCAPE: ostacolo o esigenza di recupero, direzione di fuga scelta
+    CRUISE --> BRAKE: condizioni di frenata o emergenza
+    ESCAPE --> BRAKE: rischio, curva non fattibile o waypoint non percorribile
+    BRAKE --> ESCAPE: uscita dalla frenata e scelta della direzione
+    BRAKE --> CRUISE: ramo di ripresa della navigazione
+    ESCAPE --> CRUISE: corridoio libero, rientro al target o fine evitamento
+    ESCAPE --> ESCAPE: ripianificazione della fuga o del waypoint
+    BRAKE --> BRAKE: mantenimento frenata e controlli di recupero
+    note right of CRUISE
+        Valore iniziale dell'enum Mode.
+        Goal, arresto e warmup non sono valori di Mode.
+    end note
+    note right of ESCAPE
+        vertical_escape_, local_wp_active_ e circum_active_
+        sono variabili separate, non stati dell'enum.
+    end note
