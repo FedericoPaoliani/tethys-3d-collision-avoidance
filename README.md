@@ -4,17 +4,6 @@ Progetto di tesi e tirocinio di **Federico Paoliani**: navigazione locale ed evi
 
 Il planner si ispira al Vector Field Histogram: combina cinque sonar simulati in un istogramma sferico **36 × 18**, valuta corridoi percorribili e waypoint locali, quindi genera comandi per pinne e propulsore. La validazione presentata è svolta **in simulazione**.
 
-## Video delle simulazioni riuscite
-
-Due prove del **livello 1**, registrate il 27 ottobre 2026. Clicca sulle anteprime per aprire o scaricare gli MP4.
-
-| Un drone · 61 secondi · 3× | Cinque droni · 84 secondi · 2× |
-|---|---|
-| [![Un drone al goal](video_successi_livello1/finali/tethys_1drone_livello1_successo.jpg)](video_successi_livello1/finali/tethys_1drone_livello1_successo.mp4) | [![Cinque droni al goal](video_successi_livello1/finali/tethys_5droni_livello1_successo.jpg)](video_successi_livello1/finali/tethys_5droni_livello1_successo.mp4) |
-| **1/1 al goal**, successo al tentativo 17. | **5/5 al goal**, successo al tentativo 2. |
-
-Sono nuove prove riuscite selezionate, separate dalle campagne della tesi: 16 tentativi precedenti falliti con un drone e 1 con cinque droni. Nessun contatto fisico registrato nelle due prove scelte. Le velocità indicate sono rispetto al tempo simulato. **[Dettagli, tentativi, log e montaggio](video_successi_livello1/README.md)**.
-
 ## Esplora il progetto
 
 | Materiale | Collegamento |
@@ -49,6 +38,17 @@ La tesi definitiva è disponibile in [PDF](tesi/L31_paoliani_tirocinio.pdf), nel
 L'archivio conserva `summary.json` e `metadata.json` di **2.039 run**, inclusi run non conteggiati nel riepilogo: i due totali non sono intercambiabili. Non sono incluse tutte le telemetrie grezze.
 
 Il confronto comprende cambiamenti di geometria, raggi, posizioni e, in alcuni scenari, spawn. Le vasche sono di 30 × 120 × 20 m per un drone e 60 × 120 × 20 m per cinque droni: le differenze non sono attribuibili al solo numero di ostacoli. La metrica «collisioni o blocchi» comprende contatti fisici **oppure** stalli vicino a un ostacolo e va distinta dalle sole collisioni.
+
+## Video delle simulazioni riuscite
+
+Due prove del **livello 1**, registrate il 27 ottobre 2026. Clicca sulle anteprime per aprire o scaricare gli MP4.
+
+| Un drone · 61 secondi · 3× | Cinque droni · 84 secondi · 2× |
+|---|---|
+| [![Un drone al goal](video_successi_livello1/finali/tethys_1drone_livello1_successo.jpg)](video_successi_livello1/finali/tethys_1drone_livello1_successo.mp4) | [![Cinque droni al goal](video_successi_livello1/finali/tethys_5droni_livello1_successo.jpg)](video_successi_livello1/finali/tethys_5droni_livello1_successo.mp4) |
+| **1/1 al goal**, successo al tentativo 17. | **5/5 al goal**, successo al tentativo 2. |
+
+Sono nuove prove riuscite selezionate, separate dalle campagne della tesi: 16 tentativi precedenti falliti con un drone e 1 con cinque droni. Nessun contatto fisico registrato nelle due prove scelte. Le velocità indicate sono rispetto al tempo simulato. **[Dettagli, tentativi, log e montaggio](video_successi_livello1/README.md)**.
 
 ## Contributo e limiti
 
