@@ -4,24 +4,6 @@ Progetto di tesi e tirocinio di **Federico Paoliani**: navigazione locale ed evi
 
 Il planner si ispira al Vector Field Histogram: combina cinque sonar simulati in un istogramma sferico **36 × 18**, valuta corridoi percorribili e waypoint locali, quindi genera comandi per pinne e propulsore. La validazione presentata è svolta **in simulazione**.
 
-## Esplora il progetto
-
-| Materiale | Collegamento |
-|---|---|
-| Tesi definitiva | [Leggi il PDF](tesi/L31_paoliani_tirocinio.pdf) |
-| Codice ROS 2 e risorse Gazebo | [Workspace](progetto/ros2_tethys/) |
-| Funzionamento del sistema | [Guida tecnica](documentazione/PROGETTO.md) |
-| Struttura del codice | [Diagramma UML delle classi](documentazione/uml/README.md) |
-| Preparazione e avvio su Ubuntu | [Istruzioni](documentazione/AVVIO.md) |
-| Sei scenari definitivi | [Mondi, parametri e comandi](inventario/SEI_SCENARI.md) |
-| Risultati delle prove | [Tabelle complete](risultati_finali/RISULTATI_TEST.md) · [Grafici](risultati_finali/grafici/) |
-| Limiti di riproducibilità | [Note](documentazione/RIPRODUCIBILITA.md) |
-| Ambiente del PC originale | [Versioni](inventario/AMBIENTE.md) |
-| Provenienza e integrità dei file | [Inventario](inventario/FILE_PUBBLICATI.csv) · [Preparazione](documentazione/PUBBLICAZIONE.md) |
-| Componenti di terzi | [Attribuzioni e licenze](THIRD_PARTY_NOTICES.md) |
-
-La tesi definitiva è disponibile in [PDF](tesi/L31_paoliani_tirocinio.pdf), nella versione indicata dall’autore. Le slide finali non sono ancora incluse; la raccolta non contiene una relazione di tirocinio distinta da questo elaborato.
-
 ## Architettura e UML
 
 Il sistema collega la percezione dei cinque sonar alla pianificazione locale e al controllo delle pinne e del propulsore. Ogni drone ha un'istanza del controller.
@@ -57,6 +39,24 @@ Lo schema qui sopra riassume il flusso funzionale; il diagramma delle classi dis
 L'archivio conserva `summary.json` e `metadata.json` di **2.039 run**, inclusi run non conteggiati nel riepilogo: i due totali non sono intercambiabili. Non sono incluse tutte le telemetrie grezze.
 
 Il confronto comprende cambiamenti di geometria, raggi, posizioni e, in alcuni scenari, spawn. Le vasche sono di 30 × 120 × 20 m per un drone e 60 × 120 × 20 m per cinque droni: le differenze non sono attribuibili al solo numero di ostacoli. La metrica «collisioni o blocchi» comprende contatti fisici **oppure** stalli vicino a un ostacolo e va distinta dalle sole collisioni.
+
+## Esplora il progetto
+
+| Materiale | Collegamento |
+|---|---|
+| Tesi definitiva | [Leggi il PDF](tesi/L31_paoliani_tirocinio.pdf) |
+| Codice ROS 2 e risorse Gazebo | [Workspace](progetto/ros2_tethys/) |
+| Funzionamento del sistema | [Guida tecnica](documentazione/PROGETTO.md) |
+| Struttura del codice | [Diagramma UML delle classi](documentazione/uml/README.md) |
+| Preparazione e avvio su Ubuntu | [Istruzioni](documentazione/AVVIO.md) |
+| Sei scenari definitivi | [Mondi, parametri e comandi](inventario/SEI_SCENARI.md) |
+| Risultati delle prove | [Tabelle complete](risultati_finali/RISULTATI_TEST.md) · [Grafici](risultati_finali/grafici/) |
+| Limiti di riproducibilità | [Note](documentazione/RIPRODUCIBILITA.md) |
+| Ambiente del PC originale | [Versioni](inventario/AMBIENTE.md) |
+| Provenienza e integrità dei file | [Inventario](inventario/FILE_PUBBLICATI.csv) · [Preparazione](documentazione/PUBBLICAZIONE.md) |
+| Componenti di terzi | [Attribuzioni e licenze](THIRD_PARTY_NOTICES.md) |
+
+La tesi definitiva è disponibile in [PDF](tesi/L31_paoliani_tirocinio.pdf), nella versione indicata dall’autore. Le slide finali non sono ancora incluse; la raccolta non contiene una relazione di tirocinio distinta da questo elaborato.
 
 ## Video delle simulazioni riuscite
 
